@@ -6,6 +6,22 @@
 ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)
 ![CI/CD](https://img.shields.io/badge/CI/CD-Automation-brightgreen?style=for-the-badge)
 
+## 📸 Project Demo
+
+### Live Site Preview
+
+![GitHub Pages Deployment Screenshot](images/screenshot.png "Project 1: Automated CI/CD Pipeline")
+
+**Figure 1:** The live deployed website showing the portfolio landing page with project details, tech stack badges, and key takeaways.
+
+### Workflow in Action
+
+![GitHub Actions Workflow](images/workflow-run.png "Automated Deployment Pipeline")
+
+**Figure 2:** GitHub Actions workflow successfully deploying on push to main branch.
+
+---
+
 ## 🎯 What This Project Demonstrates
 
 This project implements a **continuous integration and continuous deployment (CI/CD) pipeline** using GitHub Actions to automatically deploy a static website to GitHub Pages. Key learning objectives include:
@@ -47,3 +63,4 @@ By restricting permissions to `read`, we ensure that even if the workflow is com
 
 > GitHub. (2024). *Security hardening for GitHub Actions*. GitHub Docs. 
 > https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-least-privilege-for-github_token
+
