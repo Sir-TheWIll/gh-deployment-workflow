@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1: GitHub Pages Deployment | DevOps Portfolio</title>
     <style>
-        /* 🎨 CSS Styles - Clean & Professional */
+        /*  Dark Theme with Modern Animations */
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --bg-color: #f8fafc;
-            --text-color: #1e293b;
-            --card-bg: #ffffff;
-            --success-color: #16a34a;
+            --primary-color: #60a5fa;
+            --secondary-color: #3b82f6;
+            --accent-color: #8b5cf6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --success-color: #10b981;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
         * {
@@ -23,136 +28,407 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             line-height: 1.6;
-            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* 🌟 Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            background: rgba(96, 165, 250, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { width: 80px; height: 80px; left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 60px; height: 60px; left: 70%; top: 60%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 100px; height: 100px; left: 40%; top: 80%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 40px; height: 40px; left: 85%; top: 10%; animation-delay: 6s; }
+        .particle:nth-child(5) { width: 70px; height: 70px; left: 15%; top: 70%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
+        /* 🎯 Header with Gradient Animation */
         header {
             text-align: center;
             margin-bottom: 3rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2rem;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            animation: slideDown 0.8s ease-out, glow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 20px 80px rgba(102, 126, 234, 0.6); }
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.3s both;
         }
 
         header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            opacity: 0.95;
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         .badge {
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out 0.7s both, pulse 2s infinite;
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 📦 Animated Sections */
         section {
-            background-color: var(--card-bg);
-            padding: 2rem;
+            background-color: var(--bg-card);
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid var(--primary-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid var(--primary-color);
+            animation: slideUp 0.8s ease-out both;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        section:nth-child(3) { animation-delay: 0.1s; }
+        section:nth-child(4) { animation-delay: 0.2s; }
+        section:nth-child(5) { animation-delay: 0.3s; }
+        section:nth-child(6) { animation-delay: 0.4s; }
+        section:nth-child(7) { animation-delay: 0.5s; }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(96, 165, 250, 0.3);
+            border-left-color: var(--accent-color);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         section h2 {
             color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        section:hover h2 {
+            color: var(--accent-color);
+        }
+
+        section p {
+            color: var(--text-secondary);
             margin-bottom: 1rem;
-            font-size: 1.5rem;
         }
 
         section ul {
             margin-left: 1.5rem;
             margin-top: 1rem;
+            color: var(--text-secondary);
         }
 
         section li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
         }
 
+        section li:hover {
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        section code {
+            background-color: rgba(96, 165, 250, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* 🎨 Tech Stack with Hover Effects */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
         .tech-badge {
-            background-color: var(--primary-color);
+            background: var(--gradient-3);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: default;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
         }
 
+        .tech-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
+        }
+
+        /* 🔘 Animated CTA Button */
         .cta-button {
             display: inline-block;
-            background-color: var(--success-color);
+            background: var(--gradient-2);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: bold;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            background-color: #15803d;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(240, 147, 251, 0.6);
         }
 
+        /* 📱 Footer */
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
             padding: 2rem;
-            color: #64748b;
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            animation: fadeIn 1s ease-out 0.8s both;
         }
 
         footer a {
             color: var(--primary-color);
             text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-3);
+            transition: width 0.3s;
+        }
+
+        footer a:hover::after {
+            width: 100%;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        /* 📊 Progress Bar Animation */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(96, 165, 250, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-3);
+            width: 0;
+            animation: fillProgress 2s ease-out 1s forwards;
+            border-radius: 10px;
+        }
+
+        @keyframes fillProgress {
+            to { width: 100%; }
         }
 
         /* 📱 Responsive Design */
-        @media (max-width: 600px) {
-            body {
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 1.5rem;
+            }
+            section h2 {
+                font-size: 1.4rem;
+            }
+            .container {
                 padding: 1rem;
             }
-            header h1 {
-                font-size: 1.8rem;
-            }
+        }
+
+        /* 🌟 Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
     <div class="container">
         <!-- 🎯 Header Section -->
         <header>
             <h1>🚀 GitHub Pages Deployment</h1>
             <p>CloudOps Academy - End of Cohort 1 Portfolio</p>
-            <span class="badge">Project 1 of 5</span>
+            <span class="badge">✨ Project 1 of 5</span>
         </header>
 
         <!-- 📋 Project Overview -->
-        <section>
+        <section class="reveal">
             <h2>📌 Project Overview</h2>
             <p>
                 This project demonstrates a <strong>Continuous Integration and Continuous Deployment (CI/CD)</strong> 
@@ -166,11 +442,18 @@
                 <span class="tech-badge">CI/CD</span>
                 <span class="tech-badge">YAML</span>
                 <span class="tech-badge">DevOps</span>
+                <span class="tech-badge">Automation</span>
+            </div>
+            <div class="progress-container">
+                <div style="color: var(--text-secondary); font-size: 0.9rem;">Project Completion</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
             </div>
         </section>
 
         <!-- ✅ What Was Expected -->
-        <section>
+        <section class="reveal">
             <h2>🎯 Project Requirements</h2>
             <ul>
                 <li>Write a GitHub Actions workflow to deploy a static website to GitHub Pages</li>
@@ -182,7 +465,7 @@
         </section>
 
         <!-- 🏆 What I Accomplished -->
-        <section>
+        <section class="reveal">
             <h2>✅ What I Accomplished</h2>
             <ul>
                 <li>Created a fully automated deployment pipeline using GitHub Actions</li>
@@ -198,7 +481,7 @@
         </section>
 
         <!-- 💡 What I Learned -->
-        <section>
+        <section class="reveal">
             <h2>💡 What I Learned</h2>
             <ul>
                 <li><strong>GitHub Actions Workflow Syntax:</strong> Understanding triggers, jobs, steps, and actions</li>
@@ -211,7 +494,7 @@
         </section>
 
         <!-- 🔑 Key Takeaways -->
-        <section>
+        <section class="reveal">
             <h2>🔑 Key Takeaways</h2>
             <ul>
                 <li>Automation isn't just about speed—it's about <strong>consistency and auditability</strong></li>
@@ -223,12 +506,12 @@
         </section>
 
         <!-- 📬 Footer -->
-        <footer>
+        <footer class="reveal">
             <p>
                 Part of <strong>CloudOps Academy End of Cohort 1 Portfolio</strong><br>
-                <a href="https://github.com/Sir-TheWill" target="_blank">View My GitHub Profile</a>
+                <a href="https://github.com/Sir-TheWill" target="_blank">View My GitHub Profile →</a>
             </p>
-            <p style="margin-top: 1rem;">
+            <p style="margin-top: 1.5rem; color: var(--text-secondary);">
                 <em>Last Updated: <span id="last-updated"></span></em>
             </p>
         </footer>
@@ -241,6 +524,23 @@
             month: 'long',
             day: 'numeric'
         });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(element => {
+                var windowHeight = window.innerHeight;
+                var elementTop = element.getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
     </script>
 </body>
 </html>
