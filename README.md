@@ -29,3 +29,19 @@ on:
   push:
     branches: [main]
     paths: ['index.html']  # ← Only triggers when this file changes
+
+### 🔐 Security Considerations: Workflow Permissions
+
+**Why `contents: read` instead of `write`?**
+This workflow adheres to the **Principle of Least Privilege (PoLP)**. The objective of the pipeline is to retrieve the current state of the code and deploy it to GitHub Pages. At no point does the workflow need to modify, delete, or push changes back to the source repository. Therefore, `read` access is sufficient for the `actions/checkout` step, and `write` access is unnecessarily dangerous.
+
+**What security risk does `write` introduce?**
+Granting `contents: write` introduces the risk of **unauthorized code injection**. If the workflow were compromised (e.g., via a vulnerable third-party action or leaked credentials), an attacker could use the `GITHUB_TOKEN` to:
+1. Push malicious commits to the `main` branch.
+2. Inject backdoors into the source code that would be trusted by future clones.
+3. Delete critical repository files or tags.
+
+By restricting permissions to `read`, we ensure that even if the workflow is compromised, the integrity of the source code remains protected.
+
+GitHub. (2024). *Security hardening for GitHub Actions*. GitHub Docs. 
+https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-least-privilege-for-github_token
