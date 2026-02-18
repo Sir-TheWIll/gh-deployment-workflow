@@ -30,7 +30,7 @@ on:
     branches: [main]
     paths: ['index.html']  # ← Only triggers when this file changes
 
-
+```
 
 ## 🔐 Security Considerations: Workflow Permissions
 
@@ -45,5 +45,5 @@ Granting `contents: write` introduces the risk of **unauthorized code injection*
 
 By restricting permissions to `read`, we ensure that even if the workflow is compromised, the integrity of the source code remains protected.
 
-GitHub. (2024). *Security hardening for GitHub Actions*. GitHub Docs. 
-https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-least-privilege-for-github_token
+> GitHub. (2024). *Security hardening for GitHub Actions*. GitHub Docs. 
+> https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-least-privilege-for-github_token
