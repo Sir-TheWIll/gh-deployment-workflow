@@ -1,0 +1,41 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]        # ✅ Triggers only on push to the 'main' branch
+    paths: ["index.html"]     # ✅ Optimization: Only runs if this specific file changes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest    # ✅ Uses the latest Ubuntu runner (standard for most workflows)
+    
+    # 🔐 Security: Least-privilege permissions for the GITHUB_TOKEN
+    permissions:
+      contents: read          # ✅ Needed to checkout the code (actions/checkout)
+      pages: write            # ✅ Needed to deploy to GitHub Pages
+      id-token: write         # ✅ Needed to verify deployment origin (security)
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      # Step 1: Get the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Configure GitHub Pages environment
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      # Step 3: Upload the site as an artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'           # ✅ Uploads everything in the root directory (where index.html lives)
+      
+      # Step 4: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment        # ✅ ID needed to reference the output URL later
+        uses: actions/deploy-pages@v4
